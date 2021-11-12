@@ -1,0 +1,46 @@
+import java.util.*;
+public class Main {
+    static class Node{
+		int val;
+		Node next=null;
+		Node(int data){
+			this.val=data;	
+		}
+	}
+	public static void main(String[] args) throws Exception {
+
+		Scanner sc = new Scanner(System.in);
+                Node head=null;
+		while(true){
+			int num=sc.nextInt();
+			Node temp = new Node(num);
+			if(num==-1)
+				break;
+			
+			else if(head==null){
+				head=temp;
+			}
+                        else{
+				Node dummy=head;
+				while(dummy.next!=null){
+					dummy=dummy.next;
+				}
+				dummy.next=temp;
+
+			}
+		}
+                int k=sc.nextInt();
+		Node fast=head;
+		Node slow=head;
+
+		while(k-- > 0){
+			fast=fast.next;
+		}
+                while(fast!=null){
+			fast=fast.next;
+			slow=slow.next;
+		}
+		System.out.println(slow.val);
+	}
+
+}
