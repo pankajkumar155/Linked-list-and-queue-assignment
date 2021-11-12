@@ -1,0 +1,89 @@
+import java.util.*;
+public class Main {
+    static class Node{
+		int val;
+		Node next=null;
+		Node(int data){
+			this.val=data;
+		}
+	}
+    public static void main (String args[]) {
+		Scanner sc = new Scanner(System.in);
+		int n1=sc.nextInt();
+		int n2=sc.nextInt();
+		Node head1=null;
+		for(int i=0;i<n1;i++){
+			Node temp = new Node(sc.nextInt());
+			if(head1==null){
+				head1=temp;
+			}
+			else{
+				Node dummy=head1;
+				while(dummy.next!=null){
+					dummy=dummy.next;
+				}
+				dummy.next=temp;
+			}
+		}
+
+		Node head2=null;
+		for(int i=0;i<n2;i++){
+			Node temp=new Node(sc.nextInt());
+			if(head2==null)
+				head2 = temp;
+			else{
+				Node dummy=head2;
+				while(dummy.next!=null){
+					dummy=dummy.next;
+				}
+				dummy.next=temp;
+			}
+		}
+
+		
+
+		if(n1>n2){
+			int len =n1-n2;
+			head2=addZero(head2,len);
+		}
+		else if(n2>n1){
+			int len=n2-n1;
+			head1=addZero(head1,len);
+		}
+
+		getSum(head1,head2);
+		if(carry!=0){
+			Node dummy=new Node(carry);
+			dummy.next=head1;
+			head1=dummy;
+		}
+		while(head1!=null){
+			System.out.print(head1.val+" ");
+			head1=head1.next;
+		}
+    }
+	
+	public static Node addZero(Node head,int len){
+		for(int i=0;i<len;i++){
+			Node dummy=new Node(0);
+			dummy.next=head;
+			head=dummy;
+
+		}
+		return head;
+
+	}
+	static int carry=0;
+	public static void getSum(Node head1,Node head2){
+		if(head1==null && head2==null){
+			return;
+		}
+		getSum(head1.next,head2.next);
+		int sum=head1.val + head2.val + carry;
+		
+		carry=sum/10;
+		sum=sum%10;
+		head1.val=sum;
+		
+	}
+}
