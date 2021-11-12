@@ -1,0 +1,53 @@
+import java.util.*;
+public class Main {
+    static class Node{
+	int val;
+	Node next=null;
+	Node(int val){
+	this.val=val;
+	}
+    }
+    public static void main (String args[]) {
+	Node head = null;
+	Scanner sc=  new Scanner(System.in);
+	int n=sc.nextInt();
+        for(int i=0;i<n;i++){
+		Node temp= new Node(sc.nextInt());
+		if(head==null)
+                    head=temp;
+                    else{
+			Node dummy=head;
+			while(dummy.next!=null){
+		        	dummy=dummy.next;
+			}
+			dummy.next=temp;
+		    }
+		}
+                Node t=head;
+		System.out.print("Original List:");
+		while(t!=null){
+			System.out.print(" "+t.val);
+			t=t.next;
+		}
+                Node oddh=head;
+		Node evenh=head.next;
+		Node odd=oddh;
+		Node even=evenh;
+                while(odd!=null && odd.next!=null && even!=null && even.next!=null){
+			odd.next=odd.next.next;
+			odd=odd.next;
+
+			even.next=even.next.next;
+			even=even.next;
+		}
+                odd.next=evenh;
+		Node temp=oddh;
+		
+		System.out.println();
+		System.out.print("Modified List:");
+		while(temp!=null){
+			System.out.print(" "+temp.val);
+			temp=temp.next;
+		}
+    }
+}
